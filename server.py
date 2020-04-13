@@ -1,6 +1,5 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from io import BytesIO
-from time import time
 
 PORT = 5253
 
@@ -21,6 +20,8 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         with open(FILENAME, 'r') as f:
             self.wfile.write(bytes(f.read(), 'utf-8'))
+    def do_HEAD(self):
+        self.send_response(200)
 
-httpd = HTTPServer(('localhost', 5253), Handler)
+httpd = HTTPServer(('127.0.0.1', PORT), Handler)
 httpd.serve_forever()
